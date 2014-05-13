@@ -3,6 +3,7 @@
  */
 
 @import "bootstrap/bootstrap.less";
+@import "font-awesome/font-awesome.less";
 
 /* ==========================================================================
    Base
@@ -18,7 +19,15 @@ body { }
 
 .banner { }
 
+button.navbar-toggle:before {
+    content: "Menu\00a0";
+    display: inline;
+	text-transform: uppercase;
+}
 
+.navbar-toggle {
+    border-radius: 0;
+}
 
 /* ==========================================================================
    Content

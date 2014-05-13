@@ -10,6 +10,7 @@
     <footer>
       <?php wp_link_pages(array('before' => '<nav class="page-nav"><p>' . __('Pages:', 'roots'), 'after' => '</p></nav>')); ?>
     </footer>
+    <h2>This is content-single.php, called by single.php</h2>
     <?php comments_template('/templates/comments.php'); ?>
   </article>
 <?php endwhile; ?>
