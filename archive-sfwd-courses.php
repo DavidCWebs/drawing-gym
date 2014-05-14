@@ -13,7 +13,7 @@ Template Name: Courses
 <?php endif; ?>
 
 <?php while (have_posts()) : the_post(); ?>
-  <h1>COURSES ARCHIVE</h1>
+  <?php the_field('courses_intro','options'); ?>
   <?php get_template_part('templates/content', get_post_format()); ?>
 <?php endwhile; ?>
 

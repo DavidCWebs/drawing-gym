@@ -1,9 +1,9 @@
 <?php
 /**
- * Register sidebars and widgets
+ * Register sidebars and widget Areas
  */
 function roots_widgets_init() {
-  // Sidebars
+  // Primary Sidebar
   register_sidebar(array(
     'name'          => __('Primary', 'roots'),
     'id'            => 'sidebar-primary',
@@ -12,7 +12,18 @@ function roots_widgets_init() {
     'before_title'  => '<h3>',
     'after_title'   => '</h3>',
   ));
-
+  
+  //Secondary Sidebar for courses CPTs
+  register_sidebar(array(
+    'name'          => __('Course Sidebar', 'roots'),
+    'id'            => 'sidebar-courses',
+    'before_widget' => '<section class="widget %1$s %2$s">',
+    'after_widget'  => '</section>',
+    'before_title'  => '<h3>',
+    'after_title'   => '</h3>',
+  ));
+  
+  //Footer
   register_sidebar(array(
     'name'          => __('Footer', 'roots'),
     'id'            => 'sidebar-footer',
