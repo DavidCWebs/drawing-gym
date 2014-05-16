@@ -28,3 +28,15 @@ function carawebs_menu_classes( $classes , $item ){
 	}
 	return $classes;
 }
+
+/*==============================================================
+
+Responsive videos, thanks to Matthew Horne: http://diywpblog.com/embed-responsive-videos-with-wordpress/
+
+===============================================================*/
+
+add_filter('embed_oembed_html', 'carawebs_wrap_embed_with_div', 10, 3);
+
+function carawebs_wrap_embed_with_div($html, $url, $attr) {
+        return "<div class=\"responsive-container\">".$html."</div>";
+}
