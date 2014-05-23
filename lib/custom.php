@@ -3,6 +3,31 @@
  * Custom functions
  */
  
+/*=============================================================
+
+Debugging - output current template
+See: http://wordpress.stackexchange.com/questions/10537/get-name-of-the-current-template-file/10565#10565
+and: http://wordpress.stackexchange.com/questions/37292/how-do-you-find-out-which-template-page-is-serving-the-current-page
+
+==============================================================*/
+add_filter( 'template_include', 'var_template_include', 1000 );
+function var_template_include( $t ){
+    $GLOBALS['current_theme_template'] = basename($t);
+    return $t;
+}
+
+function get_current_template( $echo = true ) {
+    if( !isset( $GLOBALS['current_theme_template'] ) )
+        return false;
+    if( $echo )
+        echo $GLOBALS['current_theme_template'];
+    else
+        return $GLOBALS['current_theme_template'];
+}
+
+//add_shortcode('template', 'wpse10537_get_template_name()');
+
+
 /*==============================================================
 
 Menu adjustment for CPTs - stops "Blog" page being highlighed by means of active class
