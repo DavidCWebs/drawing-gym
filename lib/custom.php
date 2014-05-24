@@ -3,30 +3,66 @@
  * Custom functions
  */
  
-/*=============================================================
+/*========================================
 
-Debugging - output current template
-See: http://wordpress.stackexchange.com/questions/10537/get-name-of-the-current-template-file/10565#10565
-and: http://wordpress.stackexchange.com/questions/37292/how-do-you-find-out-which-template-page-is-serving-the-current-page
+/* Featured Image on Archive Page
 
-==============================================================*/
-add_filter( 'template_include', 'var_template_include', 1000 );
-function var_template_include( $t ){
-    $GLOBALS['current_theme_template'] = basename($t);
-    return $t;
+=========================================*/
+/**
+* Featured Image function for posts and pages
+* 
+* @param  string $class The CSS class name to apply to the image default is .img-responsive
+* @param  string $size  The image size to use. Default is full size
+* @return string        img -> width | height | src | class | alt | title
+* 
+*/
+function carawebs_home_featured_image( $size = 'full', $firstclass ) {
+ 
+     $class = $firstclass . ' img-responsive'; // Ensure that all images are responsive
+ 
+    global $post;
+ 
+    if ( has_post_thumbnail( $post->ID ) ) {
+ 
+    // get the title attribute of the post or page 
+    // and apply it to the alt tag of the image if the alt tag is empty
+    //
+    $attachment_id = get_post_thumbnail_id( $post->ID );
+ 
+    if ( get_post_meta($attachment_id, '_wp_attachment_image_alt', true) === '' ) {
+        // if no alt attribute is filled out then echo "Featured Image of article: Article Name"
+        $alt = the_title_attribute( 
+            array( 
+                'before' => __( 'Featured image of article: ', 'YOUR-THEME-TEXTDOMAIN' ), 
+                'echo' => false
+            ) 
+        );
+    } else {
+        // the post thumbnail img alt tag
+        $alt = trim( strip_tags( get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) ) );
+        // the post thumbnail img title tag
+    }
+    
+    // Get the title attribute for the featured image
+    $title = get_the_title($attachment_id);
+    
+    // Get the Image Caption
+    $caption = get_post($attachment_id)->post_excerpt;
+ 
+    $default_attr = array(
+        'class' => $class,
+        'alt' => $alt,
+        'title' => $title
+    );
+ 
+    // echo the featured image
+    //the_post_thumbnail( $size, $default_attr );
+    
+    the_post_thumbnail( $size, $default_attr );
+    //echo $caption;
+ 
+    }
 }
-
-function get_current_template( $echo = true ) {
-    if( !isset( $GLOBALS['current_theme_template'] ) )
-        return false;
-    if( $echo )
-        echo $GLOBALS['current_theme_template'];
-    else
-        return $GLOBALS['current_theme_template'];
-}
-
-//add_shortcode('template', 'wpse10537_get_template_name()');
-
 
 /*==============================================================
 

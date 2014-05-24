@@ -55,8 +55,8 @@ function roots_display_sidebar() {
      */
     array(
       'is_404',
-      'is_front_page'
-      //array('is_singular', array('page','sfwd-courses'))
+      'is_front_page',
+      array('is_archive', array('sketches','sfwd-courses'))
     ),
     /**
      * Page template checks (via is_page_template())

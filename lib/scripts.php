@@ -11,7 +11,7 @@
  * 3. /theme/assets/js/main.min.js (in footer)
  */
 function roots_scripts() {
-  wp_enqueue_style('roots_main', get_template_directory_uri() . '/assets/css/main.min.css', false, '35fba76656213b88800c647cbb009c84');
+  wp_enqueue_style('roots_main', get_template_directory_uri() . '/assets/css/main.min.css', false, '65b514e9c668f588b7def38918f92807');
 
   // jQuery is loaded using the same method from HTML5 Boilerplate:
   // Grab Google CDN's latest jQuery with a protocol relative URL; fallback to local if offline
@@ -27,7 +27,7 @@ function roots_scripts() {
   }
 
   wp_register_script('modernizr', get_template_directory_uri() . '/assets/js/vendor/modernizr-2.7.0.min.js', array(), null, false);
-  wp_register_script('roots_scripts', get_template_directory_uri() . '/assets/js/scripts.min.js', array(), '0fc6af96786d8f267c8686338a34cd38', true);
+  wp_register_script('roots_scripts', get_template_directory_uri() . '/assets/js/scripts.min.js', array(), '7701b10029a7e3db465902e046415e3a', true);
   wp_enqueue_script('modernizr');
   wp_enqueue_script('jquery');
   wp_enqueue_script('roots_scripts');
@@ -50,6 +50,31 @@ function roots_jquery_local_fallback($src, $handle = null) {
   return $src;
 }
 add_action('wp_head', 'roots_jquery_local_fallback');
+
+/*======================================================
+
+  Add MixitUp on specific pages
+  
+=======================================================*/
+
+function carawebs_mixitup(){
+	
+	if (is_archive('sketches')) {
+	
+    // Register the control script
+    wp_register_script( 'carawebs_mixitup', get_template_directory_uri() . '/assets/js/vendor/jquery.mixitup.min.js');
+    wp_register_script( 'carawebs_mixitup_control', get_template_directory_uri() . '/assets/js/vendor/mixitupcontrol.js');
+	
+	// Enqueue the controls - they will be built into the footer
+    wp_enqueue_script('carawebs_mixitup', true);
+    wp_enqueue_script('carawebs_mixitup_control', true);
+    
+	}
+}
+
+add_action('wp_enqueue_scripts', 'carawebs_mixitup', 101);
+
+/*========================================================*/
 
 function roots_google_analytics() { ?>
 <script>

@@ -114,6 +114,70 @@ button.navbar-toggle:before {
     .btn;
 }*/
 
+/* =============================================================================
+   MixitUp
+   ============================================================================*/
+.grid{
+  padding: 2% 0;
+  text-align: justify;
+  font-size: 0.1px;
+  //background: #68b8c4;
+  
+  -webkit-backface-visibility: hidden;
+}
+
+.grid:after{
+  content: '';
+  display: inline-block;
+  width: 100%;
+}
+
+.grid .mix,
+.grid .gap {
+  display: inline-block;
+  width: 49%;
+    border: solid 8px #c0c0c0;
+    padding: 20px;
+}
+
+.grid .mix {
+  text-align: left;
+  //background: #03899c;
+  margin-bottom: 2%;
+  display: none;
+}
+
+.grid .mix.category-life{
+  //border-top: 2px solid limegreen;
+}
+
+.grid .mix.category-death{
+  //border-top: 2px solid yellow;
+}
+
+.grid .mix:after{
+  content: attr(data-myorder);
+  color: white;
+  font-size: 16px;
+  display: inline-block;
+  vertical-align: top;
+  padding: 4% 6%;
+  font-weight: 700;
+}
+
+.grid .mix:before{
+  content: '';
+  display: inline-block;
+  //padding-top: 60%;
+}
+
+@media all and (min-width: 420px){
+  .grid .mix,
+  .grid .gap{
+    width: 32%;
+  }
+}//
+
 /* ==========================================================================
    Video Wrapper - this div is wrapped on oembed video in custom.php
    ========================================================================== */
@@ -145,7 +209,7 @@ button.navbar-toggle:before {
 .alignright { float: right; }
 figure.alignnone { margin-left: 0; margin-right: 0; }
 
-
+//
 
 /* ==========================================================================
    Media Queries
