@@ -5,7 +5,7 @@
       <?php get_template_part('templates/entry-meta'); ?>
     </header>
     <div class="entry-content">
-      <?php echo 'The post type is: ' . get_post_type( get_the_ID() ); ?>
+      <h3>Debugging: <?php echo 'The post type is: ' . get_post_type( get_the_ID() ); ?></h3>
       <?php the_content(); ?>
     </div>
     <footer>

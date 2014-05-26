@@ -3,10 +3,21 @@
  */
 
 @import "bootstrap/bootstrap.less";
+@import "wireframe.less";
 @import "font-awesome/font-awesome.less";
 @import "learndash_template_style.less";
 @import url(http://fonts.googleapis.com/css?family=Lato|Montserrat|Source+Sans+Pro|Gentium+Basic|Lora);
 
+
+// Debug styles
+.greyback {
+    background-color: #c0c0c0;
+    border: solid 2px #999;
+}
+
+.yellowback {
+    background-color: yellow;
+}
 /* ==========================================================================
    Base
    ========================================================================== */
@@ -15,6 +26,7 @@ body {
     font-family: Lora, arial, sans-serif;
     font-size: 16px;
     line-height: 24px;
+    overflow-y: scroll; //Force vertical scrollbar
 }
 
 h1, h2, h3, h4 { 
@@ -25,7 +37,9 @@ h1 {
     font-size: 48px;
 }
 
-
+.logged-in .navbar-default {
+    margin-top: 32px; // Make Standard
+}
 
 /* ==========================================================================
    Header
@@ -49,7 +63,9 @@ button.navbar-toggle:before {
 
 .content { }
 
-
+.featurette.row {
+    padding: 0 40px;
+}
 
 /* ==========================================================================
    Primary Content
@@ -59,7 +75,6 @@ button.navbar-toggle:before {
 
 /* Gallery Shortcode */
 .gallery-row { padding: 15px 0; }
-
 
 
 /* ==========================================================================
@@ -176,7 +191,7 @@ button.navbar-toggle:before {
   .grid .gap{
     width: 32%;
   }
-}//
+}
 
 /* ==========================================================================
    Video Wrapper - this div is wrapped on oembed video in custom.php

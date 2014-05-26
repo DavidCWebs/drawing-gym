@@ -2,7 +2,43 @@
 /**
  * Custom functions
  */
- 
+/*========================================
+
+/* Image Cropping
+
+========================================*/
+function carawebs_hard_image_crop () {
+
+    // Hard crop medium images - don't forget to regenerate thumbnails
+    if (false === get_option ('medium_crop')) {
+  
+    // Medium images don't have hard crop enabled, enable it.
+    add_option ('medium_crop', '1' );
+
+    } else {
+  
+    // Medium images have hard crop enabled, change it.
+    update_option ('medium_crop', '1' );
+    
+    }
+    
+    // Hard crop large images
+    if (false === get_option ('large_crop')) {
+  
+    // Medium images don't have hard crop enabled, enable it.
+    add_option ('large_crop', '1' );
+
+    } else {
+  
+    // Medium images have hard crop enabled, change it.
+    update_option ('large_crop', '1' );
+    
+    }
+
+}
+
+add_action ('init', 'carawebs_hard_image_crop' );
+
 /*========================================
 
 /* Featured Image on Archive Page
@@ -74,7 +110,7 @@ add_filter( 'nav_menu_css_class', 'carawebs_menu_classes', 10, 2 );
 
 function carawebs_menu_classes( $classes , $item ){
 	
-	if ( is_singular( 'sfwd-courses') || is_singular('sfwd-lessons') || is_archive( 'sfwd-courses' )	) 
+	if ( is_singular( 'sfwd-courses') || is_singular('sfwd-lessons') || is_singular('sketches') || is_post_type_archive('sfwd-courses') || is_post_type_archive('sketches')	) 
 	
 	{
 		
@@ -82,16 +118,20 @@ function carawebs_menu_classes( $classes , $item ){
 		$classes = str_replace( 'active', '', $classes );
 		
 		// find the url you want and add the class you want
-		if ( is_archive( 'sfwd-courses' ) || get_post_type() == 'sfwd-courses' ) {
+		if ( is_post_type_archive('sfwd-courses') || get_post_type() == 'sfwd-courses' )
+        {
 			$classes = str_replace( 'menu-courses', 'menu-courses active', $classes );
-			//remove_filter( 'nav_menu_css_class', 'namespace_menu_classes', 10, 2 );
+			
 		}
+		elseif ( is_post_type_archive('sketches') || get_post_type() == 'sketches' )
+        {
+            $classes = str_replace( 'menu-sketches', 'menu-sketches active', $classes );
+        }
 	}
 	return $classes;
 }
 
-/*==============================================================
-==
+/*================================================================
 
 Responsive videos, thanks to Matthew Horne: http://diywpblog.com/embed-responsive-videos-with-wordpress/
 

@@ -17,8 +17,9 @@
     }
   ?>
 
-  <div class="wrap container" role="document">
-    <div class="content row">
+  <div class="wrap <?php if ( is_front_page() ): ?>container-fluid<?php else: ?>container<?php endif; ?>" role="document">
+    <!-- DE removed .container on Front Page to make wrapper full width -->
+    <div class="content row<?php if ( !is_front_page() ): ?>row<?php endif; ?>">
       <main class="main <?php echo roots_main_class(); ?>" role="main">
         <?php include roots_template_path(); ?>
       </main><!-- /.main -->

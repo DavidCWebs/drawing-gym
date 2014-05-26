@@ -5,6 +5,9 @@
       <?php get_template_part('templates/entry-meta'); ?>
     </header>
     <div class="entry-content">
+      <?php carawebs_home_featured_image('thumbnail'); ?>
+      <?php carawebs_home_featured_image('medium'); ?>
+      <?php carawebs_home_featured_image('large'); ?>
       <?php the_content(); ?>
     </div>
     <footer>
