@@ -2,6 +2,147 @@
 /**
  * Custom functions
  */
+ 
+/*
+add_action('admin_menu', function() { remove_meta_box('pageparentdiv', 'lessons', 'normal');});
+add_action('add_meta_boxes', function() { add_meta_box('lesson-parent', 'Course', 'course_attributes_meta_box', 'lessons', 'side', 'high');});
+  
+    function course_attributes_meta_box($post) {
+    
+        $post_type_object = get_post_type_object($post->post_type);
+        
+        if ( $post_type_object->hierarchical ) {
+        
+        $pages = wp_dropdown_pages(array('post_type' => 'page', 'selected' => $post->post_parent, 'name' => 'parent_id', 'show_option_none' => __('(no parent)'), 'sort_column'=> 'menu_order, post_title', 'echo' => 0));
+          
+          if ( ! empty($pages) ) {
+            
+            echo $pages;
+          } // end empty pages check
+        } // end hierarchical check.
+      }
+*/
+/*=====================================*//*
+//Add the meta box callback function
+/*
+add_action('admin_menu', function() { remove_meta_box('pageparentdiv', 'lessons', 'normal');});
+add_action('add_meta_boxes', 'lesson_meta');
+
+function lesson_meta(){
+    
+	add_meta_box('lesson_parent_id', 'Lesson Study Parent ID', 'set_lesson_parent_id', 'lessons', 'side', 'high');
+
+}
+
+//Meta box for setting the parent ID
+function set_lesson_parent_id() {
+	
+	global $post;
+	$custom = get_post_custom($post->ID);
+	$parent_id = $custom['parent_id'][0];
+	
+	?>
+	<p>Please specify the ID of the page or post to be a parent to this Case Study.</p>
+	<p>Leave blank for no heirarchy.  Case studies will appear from the server root with no associated parent page or post.</p>
+	<input type="text" id="parent_id" name="parent_id" value="<?php echo $post->post_parent; ?>" />
+	<?php
+	
+	// create a custom nonce for submit verification later
+	echo '<input type="hidden" name="parent_id_noncename" value="' . wp_create_nonce(__FILE__) . '" />';
+}
+
+// Save the meta data
+function save_lesson_parent_id($post_id) {
+	global $post;
+
+	// make sure data came from our meta box
+	if (!wp_verify_nonce($_POST['parent_id_noncename'],__FILE__)) return $post_id;
+	if(isset($_POST['parent_id']) && ($_POST['post_type'] == "lessons")) {
+	$data = $_POST['parent_id'];
+	update_post_meta($post_id, ‘parent_id’, $data);
+	}
+}
+
+ */
+/*========================================
+
+/* Display Category
+
+========================================*/
+function carawebs_show_taxonomy_terms ($taxonomy = 'category') {
+        
+        global $post;
+        
+        // get the term IDs assigned to post.
+        $post_terms = wp_get_object_terms( $post->ID, $taxonomy, array( 'fields' => 'ids' ) );
+        // separator between links
+        $separator = ', ';
+
+        if ( !empty( $post_terms ) && !is_wp_error( $post_terms ) ) {
+
+            $term_ids = implode( ',' , $post_terms );
+            $terms = wp_list_categories( 'title_li=&style=none&echo=0&taxonomy=' . $taxonomy . '&include=' . $term_ids );
+            $terms = rtrim( trim( str_replace( '<br />',  $separator, $terms ) ), $separator );
+
+            // display post categories
+            echo  $terms;
+        }
+}
+
+function carawebs_course_id ( ) {
+    
+    foreach((get_the_terms($post->ID, 'courses')) as $term) 
+        {
+        echo $term->term_id. '';
+        }
+       
+}
+
+// Related Lessons
+
+function carawebs_related_lessons() {
+// get the custom post type's taxonomy terms
+    global $post;
+    $custom_taxterms = wp_get_object_terms( $post->ID, 'courses', array('fields' => 'ids') );
+    // arguments
+            $args = array(
+                'post_type' => 'lessons',
+                'post_status' => 'publish',
+                'posts_per_page' => 10, // edit this number
+                'orderby' => 'date',
+                'order' => 'ASC',
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'courses',
+                        'field' => 'id',
+                        'terms' => $custom_taxterms
+                    )
+                ),
+                'post__not_in' => array ($post->ID),
+            );
+    
+    $related_items = new WP_Query( $args );
+    
+    // loop over query
+    if ($related_items->have_posts())
+    {        
+        echo '<ul>';
+
+            while ( $related_items->have_posts() ) : $related_items->the_post();
+            ?>
+            <li><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></li>
+            <?php
+            endwhile;
+
+        echo '</ul>';
+        
+    }
+    
+    // Reset Post Data
+    wp_reset_postdata();
+    
+}
+
 /*========================================
 
 /* Image Cropping
@@ -110,7 +251,7 @@ add_filter( 'nav_menu_css_class', 'carawebs_menu_classes', 10, 2 );
 
 function carawebs_menu_classes( $classes , $item ){
 	
-	if ( is_singular( 'sfwd-courses') || is_singular('sfwd-lessons') || is_singular('sketches') || is_post_type_archive('sfwd-courses') || is_post_type_archive('sketches')	) 
+	if ( is_singular( 'sfwd-courses') || is_singular('lessons') || is_singular('sketches') || is_post_type_archive('lessons') || is_post_type_archive('sketches')	) 
 	
 	{
 		
@@ -118,9 +259,9 @@ function carawebs_menu_classes( $classes , $item ){
 		$classes = str_replace( 'active', '', $classes );
 		
 		// find the url you want and add the class you want
-		if ( is_post_type_archive('sfwd-courses') || get_post_type() == 'sfwd-courses' )
+		if ( is_post_type_archive('lessons') /*|| get_post_type() == 'lessons'*/ )
         {
-			$classes = str_replace( 'menu-courses', 'menu-courses active', $classes );
+			$classes = str_replace( 'menu-lessons', 'menu-lessons active', $classes );
 			
 		}
 		elseif ( is_post_type_archive('sketches') || get_post_type() == 'sketches' )
@@ -130,6 +271,22 @@ function carawebs_menu_classes( $classes , $item ){
 	}
 	return $classes;
 }
+
+
+/*================================================================
+
+Post Order Archive Pages
+
+================================================================*/
+function change_order($orderby, $query) {
+    
+    global $wpdb;
+    if(is_archive())
+    $orderby = "{$wpdb->prefix}posts.post_date ASC";
+    return $orderby;
+}
+add_filter('posts_orderby','change_order');
+
 
 /*================================================================
 

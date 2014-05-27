@@ -4,10 +4,16 @@
   // WP_Query arguments
     $args = array (
         'post_type'              => 'lessons',
-        'category_name'          => 'Gensler',
+        'tax_query' => array(
+		array(
+			'taxonomy' => 'courses',
+			'field' => 'slug',
+			'terms' => 'gensler-custom-course'
+		)),
+        /*'category_name'          => 'Gensler',*/
         'posts_per_page'         => '10',
         'posts_per_archive_page' => '10',
-        'order'                  => 'DESC',
+        'order'                  => 'ASC',
     );
 
     // The Query
@@ -17,7 +23,13 @@
     if ( $lessonquery->have_posts() ) {
         while ( $lessonquery->have_posts() ) {
             $lessonquery->the_post();
-            // do something
+            
+           ?>  <header>
+                        <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+                        <?php get_template_part('templates/entry-meta'); ?>
+            </header>
+            <?php
+            
         }
     } else {
         // no posts found

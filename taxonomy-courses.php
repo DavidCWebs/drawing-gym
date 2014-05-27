@@ -1,5 +1,8 @@
 <?php get_template_part('templates/page', 'header'); ?>
 
+<?php if ( !get_query_var( 'paged' ) ) {
+  echo wpautop( term_description() );
+} ?>
 <?php if (!have_posts()) : ?>
   <div class="alert alert-warning">
     <?php _e('Sorry, no results were found.', 'roots'); ?>
@@ -7,16 +10,9 @@
   <?php get_search_form(); ?>
 <?php endif; ?>
 
-    <button class="filter" data-filter="all">All</button>
-    <button class="filter" data-filter=".category-life">Life</button>
-    <button class="filter" data-filter=".category-death">Death</button>
-
-<div id="grid" class="grid top-l-pad">
-    <?php while (have_posts()) : the_post(); ?>
-      <?php get_template_part('templates/content', 'sketch-teaser'); ?>
-    <?php endwhile; ?>
-    <div class="gap"></div>
-</div>
+<?php while (have_posts()) : the_post(); ?>
+  <?php get_template_part('templates/content', get_post_format()); ?>
+<?php endwhile; ?>
 
 <?php if ($wp_query->max_num_pages > 1) : ?>
   <nav class="post-nav">

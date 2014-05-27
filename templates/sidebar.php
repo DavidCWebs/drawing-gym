@@ -3,12 +3,11 @@ if ( is_singular('sfwd-courses') ) {
   dynamic_sidebar('sidebar-courses');
 }
 
-elseif (is_singular('sfwd-lessons')) {
+elseif (is_singular('lessons')) {
   dynamic_sidebar('sidebar-lessons');
 }
 
 else {
-  ?><div class="bottom-pad"><?php get_search_form(); ?></div><?php
   dynamic_sidebar('sidebar-primary');
 }  
 
