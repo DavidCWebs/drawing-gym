@@ -81,6 +81,38 @@ function allow_contributor_uploads() {
 	$contributor->add_cap('upload_files');
 }
 
+
+/*========================================
+
+/* Remove lost password link
+
+=========================================*/
+
+// When using the lost password feature after you add this snippet wordpress will display “Password reset is not allowed for this user”
+function carawebs_disable_password_reset() {
+              return false;
+              }
+add_filter ( 'allow_password_reset', 'carawebs_disable_password_reset' );
+
+
+// This does not remove the link but just replaces the Lost your password? text with nothing effectively removing the link
+function carawebs_remove_lostpassword_text ( $text ) {
+     if ($text == 'Lost your password?'){$text = '';}
+        return $text;
+     }
+add_filter( 'gettext', 'carawebs_remove_lostpassword_text' );
+
+/*========================================
+
+/* Manage admin screen options - only for admin
+
+=========================================*/
+
+function carawebs_remove_screen_options(){
+   return current_user_can( 'manage_options' );
+}
+add_filter('screen_options_show_screen', 'carawebs_remove_screen_options');
+
 /*========================================
 
 /* Carawebs Custom Image for ACF image embed

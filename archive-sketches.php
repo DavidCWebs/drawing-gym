@@ -8,8 +8,8 @@
 <?php endif; ?>
 
     <button class="filter" data-filter="all">All</button>
-    <button class="filter" data-filter=".category-life">Life</button>
-    <button class="filter" data-filter=".category-death">Death</button>
+    <button class="filter" data-filter=".category-one">Category One</button>
+    <button class="filter" data-filter=".category-two">Category Two</button>
 
 <div id="grid" class="grid top-l-pad">
     <?php while (have_posts()) : the_post(); ?>
