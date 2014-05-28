@@ -65,6 +65,21 @@ function save_lesson_parent_id($post_id) {
 
  */
  
+/*========================================
+
+/* Contributor can upload files 
+
+========================================*/
+
+if ( current_user_can('contributor') && !current_user_can('upload_files') )
+	
+	add_action('admin_init', 'allow_contributor_uploads');
+
+function allow_contributor_uploads() {
+	
+	$contributor = get_role('contributor');
+	$contributor->add_cap('upload_files');
+}
 
 /*========================================
 
@@ -73,7 +88,7 @@ function save_lesson_parent_id($post_id) {
 =========================================*/
 
 function carawebs_custom_image( $field, $class, $size = 'thumbnail' ) {
-global $post;
+
 $image = get_field($field);
     
     $thumb = $image['sizes'][ $size ];
