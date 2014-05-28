@@ -5,15 +5,12 @@
       <?php get_template_part('templates/entry-meta'); ?>
     </header>
     <div class="entry-content">
-      <?php carawebs_home_featured_image('thumbnail'); ?>
-      <?php carawebs_home_featured_image('medium'); ?>
       <?php carawebs_home_featured_image('large'); ?>
       <?php the_content(); ?>
     </div>
     <footer>
       <?php wp_link_pages(array('before' => '<nav class="page-nav"><p>' . __('Pages:', 'roots'), 'after' => '</p></nav>')); ?>
     </footer>
-    <h2>This is content-single-sketch.php, called by single-sketch.php</h2>
     <?php comments_template('/templates/comments.php'); ?>
   </article>
 <?php endwhile; ?>

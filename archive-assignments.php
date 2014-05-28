@@ -1,17 +1,4 @@
-<?php get_template_part('templates/page', 'header'); ?>
-
-<?php 
-  // The custom taxonomy description
-  //if ( !get_query_var( 'paged' ) ) {
-  //echo wpautop( term_description() );
-//}
-
-if ( !get_query_var( 'paged' ) ) // Only show on first page
-    {
-    echo wpautop( apply_filters( 'the_content', term_description() ) );
-    }
-
-?>
+<?php get_template_part('templates/page', 'gallery-header'); ?>
 
 <?php if (!have_posts()) : ?>
   <div class="alert alert-warning">
@@ -20,9 +7,16 @@ if ( !get_query_var( 'paged' ) ) // Only show on first page
   <?php get_search_form(); ?>
 <?php endif; ?>
 
-<?php while (have_posts()) : the_post(); ?>
-  <?php get_template_part('templates/content', get_post_format()); ?>
-<?php endwhile; ?>
+    <button class="filter" data-filter="all">All</button>
+    <button class="filter" data-filter=".category-one">Category One</button>
+    <button class="filter" data-filter=".category-two">Category Two</button>
+
+<div id="grid" class="grid top-l-pad">
+    <?php while (have_posts()) : the_post(); ?>
+      <?php get_template_part('templates/content', 'sketch-teaser'); ?>
+    <?php endwhile; ?>
+    <div class="gap"></div>
+</div>
 
 <?php if ($wp_query->max_num_pages > 1) : ?>
   <nav class="post-nav">

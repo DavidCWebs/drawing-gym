@@ -64,6 +64,30 @@ function save_lesson_parent_id($post_id) {
 }
 
  */
+ 
+
+/*========================================
+
+/* Carawebs Custom Image for ACF image embed
+
+=========================================*/
+
+function carawebs_custom_image( $field, $class, $size = 'thumbnail' ) {
+global $post;
+$image = get_field($field);
+    
+    $thumb = $image['sizes'][ $size ];
+
+    if( !empty($image) ){ ?>
+
+        <img class="img-responsive <?php echo $class; ?>" src="<?php echo $thumb;/*$image['url'];*/ ?>" alt="<?php echo $image['alt']; ?>" title="<?php echo $image['title']; ?>" />
+
+    <?php }
+
+}
+
+
+
 /*========================================
 
 /* Display Category
@@ -98,7 +122,11 @@ function carawebs_course_id ( ) {
        
 }
 
-// Related Lessons
+/*============================================================
+
+ Related Lessons
+ 
+============================================================*/
 
 function carawebs_related_lessons() {
 // get the custom post type's taxonomy terms
@@ -108,7 +136,7 @@ function carawebs_related_lessons() {
             $args = array(
                 'post_type' => 'lessons',
                 'post_status' => 'publish',
-                'posts_per_page' => 10, // edit this number
+                'posts_per_page' => 10,
                 'orderby' => 'date',
                 'order' => 'ASC',
                 'tax_query' => array(
@@ -118,7 +146,7 @@ function carawebs_related_lessons() {
                         'terms' => $custom_taxterms
                     )
                 ),
-                'post__not_in' => array ($post->ID),
+                'post__not_in' => array ($post->ID), // Don't retrieve the current post!
             );
     
     $related_items = new WP_Query( $args );
