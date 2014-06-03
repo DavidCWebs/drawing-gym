@@ -80,7 +80,33 @@ function allow_contributor_uploads() {
 	$contributor = get_role('contributor');
 	$contributor->add_cap('upload_files');
 }
+/*========================================
 
+/* Build download link
+
+=========================================*/
+
+function carawebs_repeater_field ($repeater_field, $subfield_1, $subfield_2) {
+
+            if(get_field($repeater_field))
+            {
+            ?><h3>Uploaded PDF Files for this Assignment</h3>
+                <ul><?php
+                while(has_sub_field($repeater_field)): 
+
+                $attachment_id = get_sub_field($subfield_1);
+                $url = wp_get_attachment_url( $attachment_id );
+                $title = get_the_title( $attachment_id );
+
+                                ?>
+                                <li><a href="<?php echo $url; ?>">Download File: <?php echo $title; ?></a>, 
+                                File size: <?php the_sub_field($subfield_2); ?></li>
+
+                <?php endwhile;
+                ?></ul><?php
+
+            } 
+}
 
 /*========================================
 
@@ -88,7 +114,8 @@ function allow_contributor_uploads() {
 
 =========================================*/
 
-// When using the lost password feature after you add this snippet wordpress will display “Password reset is not allowed for this user”
+// When using the lost password feature after you add this snippet wordpress will display 'Password reset is not allowed for this user'
+
 function carawebs_disable_password_reset() {
               return false;
               }

@@ -6,7 +6,7 @@
   </div>
   <?php get_search_form(); ?>
 <?php endif; ?>
-
+<h3>index.php</h3>
 <?php while (have_posts()) : the_post(); ?>
   <?php get_template_part('templates/content', get_post_format()); ?>
 <?php endwhile; ?>

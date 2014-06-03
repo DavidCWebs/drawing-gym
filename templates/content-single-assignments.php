@@ -7,7 +7,7 @@
     <div class="entry-content">
       <?php carawebs_home_featured_image('large'); ?>
       <?php the_content(); ?>
-      
+      <?php carawebs_repeater_field('upload_pdf','file_upload','file_size'); ?>
     </div>
     <footer>
       <?php wp_link_pages(array('before' => '<nav class="page-nav"><p>' . __('Pages:', 'roots'), 'after' => '</p></nav>')); ?>

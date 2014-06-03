@@ -22,19 +22,19 @@
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-sm-4 text-center">
-          <img src="images/hero-image-1.jpg" class="img-responsive thumbnail center-block">
+          <img src="images/chris-howard-1.jpg" class="img-responsive thumbnail center-block">
           <h2>Drawing Gym for Architects</h2>
           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum. </p>
           <p><a href="#">View details &raquo;</a></p>
         </div>
         <div class="col-sm-4 text-center">
-          <img src="images/6Eva-MacNamaraExpeditionjpg-547x371.jpg" class="img-responsive thumbnail center-block">
+          <img src="images/Becky-Spenceley-Sketch1.jpg" class="img-responsive thumbnail center-block">
           <h2>Drawing Gym for Engineers</h2>
           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo.</p>
           <p><a href="#">View details &raquo;</a></p>
        </div>
         <div class="col-sm-4 text-center">
-          <img src="images/2Ed-HollisStructure-Mode-547x371.jpg" class="img-responsive thumbnail center-block">
+          <img src="images/chris-howard-3.jpg" class="img-responsive thumbnail center-block">
           <h2>Drawing Gym for Interior Designers</h2>
           <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
           <p><a href="#">View details &raquo;</a></p>
@@ -56,7 +56,7 @@
                 <div class="col-md-3">
                   <div class="overlay-container">
                         <img class="featurette-image img-responsive thumbnail" 
-                        src="images/2Ed-HollisStructure-Mode-527x371.jpg" alt="Generic placeholder image">
+                        src="images/gensler-3.jpg" alt="Generic placeholder image">
                         <div class="overlay-wrapper"><!--allows a darkened background for legibility -->
                         <div class="overlay-excerpt"><!-- allows overlay to be styled & positioned -->
                                 <h2>Improve Your Sketching</h2>
@@ -70,7 +70,7 @@
                 <div class="col-md-3">
                   <div class="overlay-container">
                         <img class="featurette-image img-responsive thumbnail" 
-                        src="images/2Martin-FowlerWebb-Yates1-540x371.jpg" alt="Generic placeholder image">
+                        src="images/chris-howard-2.jpg" alt="Generic placeholder image">
                         <div class="overlay-wrapper"><!--allows a darkened background for legibility -->
                         <div class="overlay-excerpt"><!-- allows overlay to be styled & positioned -->
                                 <h2>Description of This Image</h2>
@@ -90,7 +90,7 @@
         <div class="col-md-3 col-md-offset-1">
                   <div class="overlay-container">
                         <img class="featurette-image img-responsive thumbnail" 
-                        src="images/2Martin-FowlerWebb-Yates1-540x371.jpg" alt="Generic placeholder image">
+                        src="images/gensler-image-11.jpg" alt="Generic placeholder image">
                         <div class="overlay-wrapper"><!--allows a darkened background for legibility -->
                         <div class="overlay-excerpt"><!-- allows overlay to be styled & positioned -->
                                 <h2>Description of This Image</h2>
